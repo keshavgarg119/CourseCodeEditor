@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cursor Code Editor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-bg">
+    <!-- neon gradient animated background -->
+    <div class="grid-overlay"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <!-- using uploaded image as logo -->
+      <img src="Screenshot 2025-11-25 143036.png" alt="logo" class="logo" />
+      <div class="title-block">
+        <div class="title">CursorCode</div>
+        <div class="subtitle">HTML  • CSS  • JS — live preview</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="tabs" role="tablist" aria-label="Editors">
+        <button class="tab active" data-editor="html">HTML</button>
+        <button class="tab" data-editor="css">CSS</button>
+        <button class="tab" data-editor="js">JS</button>
+      </div>
+
+      <div class="actions">
+        <label class="auto">
+          <input type="checkbox" id="autoRun" checked />
+          Auto
+        </label>
+        <button id="runBtn" class="btn primary">Run</button>
+        <button id="downloadBtn" class="btn">Download</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="left-panel">
+      <div class="editor-toolbar">
+        <div class="file-indicator">index.html</div>
+        <div class="editor-info">Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to run</div>
+      </div>
+
+      <div class="editor-stack">
+        <textarea id="html" class="editor active" spellcheck="false">
+<!-- HTML -->
+<h1 class="cursor">Welcome to CursorCode</h1>
+<div id="app">Type HTML here</div>
+        </textarea>
+
+        <textarea id="css" class="editor" spellcheck="false">
+/* CSS */
+:root{
+  --bg:#0b0b12;
+  --cursor:#00e5ff;
+}
+body{ margin:0; }
+.cursor{
+  text-shadow:
+    0 0 6px rgba(0,229,255,0.9),
+    0 0 12px rgba(0,229,255,0.7),
+    0 0 30px rgba(0,120,255,0.4);
+}
+        </textarea>
+
+        <textarea id="js" class="editor" spellcheck="false">
+// JS
+console.log("CourseCode editor ready");
+document.getElementById('app').textContent = 'Rendered by your JS!';
+        </textarea>
+      </div>
+
+    </section>
+
+    <!-- draggable divider -->
+    <div id="drag" class="drag-handle" title="Drag to resize"></div>
+
+    <section class="right-panel">
+      <div class="preview-top">
+        <span>Preview</span>
+        <span class="live-indicator" id="liveIndicator">Live</span>
+      </div>
+      <iframe id="preview" class="preview" sandbox="allow-scripts"></iframe>
+
+      <div class="console" id="console">
+        <div class="console-header">Console</div>
+        <div class="console-body" id="consoleBody">Preview console output will appear here.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>Made by Keshav Garg</div>
+    <div class="footer-right">Tip: Use tabs above to switch editors</div>
+  </footer>
+
+  <script src="editor.js"></script>
+</body>
+</html>
