@@ -1,11 +1,3 @@
-/* editor.js
-   - Tabs to switch editors (only one visible at a time)
-   - Auto-run debounced
-   - Run button
-   - Download combined html file
-   - Draggable resizer between panels
-   - Console capture from preview (message passing)
-*/
 
 const tabs = document.querySelectorAll('.tab');
 const editors = document.querySelectorAll('.editor');
@@ -21,7 +13,7 @@ const downloadBtn = document.getElementById('downloadBtn');
 const consoleBody = document.getElementById('consoleBody');
 const liveIndicator = document.getElementById('liveIndicator');
 
-/* ---- tab switching ---- */
+
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelector('.tab.active').classList.remove('active');
