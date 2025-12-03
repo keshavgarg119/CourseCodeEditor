@@ -12,7 +12,13 @@ const preview = document.getElementById('preview');
 const downloadBtn = document.getElementById('downloadBtn');
 const consoleBody = document.getElementById('consoleBody');
 const liveIndicator = document.getElementById('liveIndicator');
+const fileIndicator = document.querySelector('.file-indicator');
 
+const fileNames = {
+  'html': 'index.html',
+  'css': 'style.css',
+  'js': 'script.js'
+};
 
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
@@ -21,6 +27,11 @@ tabs.forEach(tab => {
 
     document.querySelector('.editor.active').classList.remove('active');
     document.getElementById(tab.dataset.editor).classList.add('active');
+    
+    // Update file indicator
+    if (fileIndicator) {
+      fileIndicator.textContent = fileNames[tab.dataset.editor];
+    }
   });
 });
 
@@ -130,7 +141,22 @@ window.addEventListener('message', (ev) => {
     const line = document.createElement('div');
     line.className = 'console-line';
     const time = new Date().toLocaleTimeString();
-    line.innerHTML = `<span style="opacity:.6">[${time}]</span> <strong>${data.type}</strong>: ${data.args.join(' ')}`;
+    
+    // color based on console type
+    let typeColor = '#00e5ff';  // default cyan for log
+    let typeStyle = 'color:' + typeColor + ';';
+    
+    if (data.type === 'error') {
+      typeColor = '#ff6b6b';    // red for error
+    } else if (data.type === 'warn') {
+      typeColor = '#ffd93d';    // yellow for warn
+    } else if (data.type === 'info') {
+      typeColor = '#6a9eff';    // light blue for info
+    } else if (data.type === 'debug') {
+      typeColor = '#a78bfa';    // purple for debug
+    }
+    
+    line.innerHTML = `<span style="opacity:.6;color:#888">[${time}]</span> <span style="color:${typeColor};font-weight:600">${data.type}</span>: <span style="color:#cfefff">${data.args.join(' ')}</span>`;
     consoleBody.appendChild(line);
     consoleBody.scrollTop = consoleBody.scrollHeight;
   }
